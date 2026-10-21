@@ -23,16 +23,18 @@
 .stat__num small { font-size: 0.6em; margin-left: 0.15em; }
 .stat__label { font-size: var(--fs-label-sm); color: rgb(var(--ink-rgb) / 0.5); }
 
-/* the five principle cards, side by side */
-.principles { display: flex; gap: 3vw; padding: 14svh 10vw 0 6vw; align-items: flex-start; }
-.principle { position: relative; width: 22vw; flex: none; display: flex; flex-direction: column; }
-.principle__media { width: 100%; aspect-ratio: 3 / 4; overflow: clip; border: 1px solid var(--hairline); background: var(--cream-2); margin-bottom: 1.4em; }
-.principle__media img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.06); transition: transform 1.2s var(--ease-out); }
+/* the five parts of the scheme: each a near-full-page panel on the track, the caption laid over the image */
+.principles { display: flex; gap: 2vw; padding: 0 7vw 0 0; align-items: stretch; height: 100svh; }
+.principle { position: relative; width: 86vw; height: 100svh; flex: none; }
+.principle__media { position: absolute; inset: 9svh 0; overflow: clip; background: var(--cream-2); }
+.principle__media picture, .principle__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.principle__media img { transform: scale(1.06); transition: transform 1.2s var(--ease-out); }
 .principle:hover .principle__media img { transform: scale(1); }
-.principle__media--plan img { object-fit: cover; }
-.principle__num { font: 400 0.9375rem / 1 var(--font-display); color: rgb(var(--ink-rgb) / 0.45); margin-bottom: 0.9em; }
-.principle__name { margin: 0 0 0.5em; font: 400 clamp(1.4rem, 1.8vw, 1.9rem) / 1.1 var(--font-display); letter-spacing: -0.01em; }
-.principle__desc { margin: 0; font: 400 clamp(0.875rem, 0.8rem + 0.25vw, 1rem) / 1.6 var(--font-sans); color: rgb(var(--ink-rgb) / 0.62); }
+.principle__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 48%, rgb(var(--night-rgb) / 0.72) 100%); pointer-events: none; }
+.principle__caption { position: absolute; left: 3.2vw; right: 3.2vw; bottom: calc(9svh + 3.2vw); max-width: 34em; color: var(--cream); }
+.principle__num { display: block; font: 400 0.9375rem / 1 var(--font-display); color: rgb(var(--cream-rgb) / 0.6); margin-bottom: 0.9em; }
+.principle__name { margin: 0 0 0.45em; font: 400 clamp(1.8rem, 2.8vw, 3rem) / 1.08 var(--font-display); letter-spacing: -0.015em; }
+.principle__desc { margin: 0; font: 400 clamp(0.9375rem, 0.85rem + 0.3vw, 1.125rem) / 1.6 var(--font-sans); color: rgb(var(--cream-rgb) / 0.78); }
 .concept__meta { position: absolute; left: var(--margin); bottom: 4.2svh; margin: 0; color: rgb(var(--ink-rgb) / 0.5); }
 
 @media (max-width: 991px), (orientation: portrait) {
@@ -43,9 +45,11 @@
   .concept__rule { display: none; }
   .concept__title { font-size: clamp(2.2rem, 9.2vw, 3rem); margin-bottom: 5svh; }
   .concept__hint { display: none; }
-  .principles { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 4vw; padding: 8svh var(--margin) 2svh; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .principles { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 3vw; padding: 6svh var(--margin) 2svh; height: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .principles::-webkit-scrollbar { display: none; }
-  .principle { width: 74vw; scroll-snap-align: start; }
+  .principle { width: 86vw; height: 70svh; scroll-snap-align: start; }
+  .principle__media { inset: 0; }
+  .principle__caption { left: 5vw; right: 5vw; bottom: 5vw; }
   .concept__meta { position: static; margin: 6svh var(--margin) 0; }
   .concept__initial { right: -24vw; top: 4svh; font-size: 90vw; }
 }

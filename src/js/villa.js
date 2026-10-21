@@ -6,9 +6,8 @@ import { h, p, ctn, line, slide } from './reveal.js';
 gsap.registerPlugin(ScrollTrigger);
 
 // Section 7: the residence, floor by floor. ERA's type slider recast for one villa: each slide is a floor; the plan
-// wipes in, the words follow; the pagination counts and a bar times the autoplay; "Explore" opens the room list and
-// drops numbered markers on the plan, each row lighting its room.
-const AUTO = 7;
+// wipes in, the words follow; the pagination counts; "Explore" opens the room list and drops numbered markers on the
+// plan, each row lighting its room. Nothing advances on its own: the arrows, the keyboard and floors:go move the slides.
 const pad = (n) => String(n).padStart(2, '0');
 
 export function initVilla() {
@@ -35,7 +34,7 @@ export function initVilla() {
   let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(fit, 60); });
 
   // ---- the slider
-  let i = 0, busy = false, timer = null, exploring = null;
+  let i = 0, busy = false, exploring = null;
   slides.forEach((s, k) => { gsap.set(s, { display: k === 0 ? 'block' : 'none', position: k === 0 ? 'relative' : 'absolute' }); s.setAttribute('aria-hidden', String(k !== 0)); });
   fit(); run(slides[0], 'initial'); gsap.set(slides[0].querySelectorAll('[data-part]'), { visibility: 'visible' });
   const count = () => { cur.textContent = pad(i + 1); nxt.textContent = pad(i === slides.length - 1 ? 1 : i + 2); };
@@ -64,20 +63,16 @@ export function initVilla() {
   window.addEventListener('floors:go', (e) => { const n = +e.detail; if (!Number.isNaN(n)) go(n); });
   const step = (d) => go((i + d + slides.length) % slides.length);
 
-  // ---- autoplay with the bar (paused while exploring, hovering or off screen)
-  const stop = () => { clearInterval(timer); timer = null; if (bar) { gsap.killTweensOf(bar); gsap.set(bar, { scaleX: 0 }); } };
-  const start = () => { if (REDUCED || timer || exploring) return; const tick = () => { if (bar) gsap.fromTo(bar, { scaleX: 0 }, { scaleX: 1, duration: AUTO, ease: 'none', transformOrigin: 'left center' }); }; tick(); timer = setInterval(() => { step(1); tick(); }, AUTO * 1000); };
-  const restart = () => { stop(); start(); };
-  prev.addEventListener('click', () => { step(-1); restart(); });
-  next.addEventListener('click', () => { step(1); restart(); });
-  slider.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') { step(1); restart(); } else if (e.key === 'ArrowLeft') { step(-1); restart(); } });
-  slider.addEventListener('pointerenter', stop); slider.addEventListener('pointerleave', () => { if (!exploring) start(); });
-  ScrollTrigger.create({ trigger: slider, start: 'top 80%', end: 'bottom 20%', onEnter: () => { run(slides[0], 'reveal', 0.2); start(); }, onEnterBack: start, onLeave: stop, onLeaveBack: stop });
-  document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+  // ---- manual only
+  if (bar) gsap.set(bar, { scaleX: 0 });
+  prev.addEventListener('click', () => step(-1));
+  next.addEventListener('click', () => step(1));
+  slider.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') step(1); else if (e.key === 'ArrowLeft') step(-1); });
+  ScrollTrigger.create({ trigger: slider, start: 'top 80%', once: true, onEnter: () => run(slides[0], 'reveal', 0.2) });
 
   // ---- explore: the room list and the markers
   const openRooms = (s) => {
-    exploring = s; stop(); s.classList.add('is-exploring');
+    exploring = s; s.classList.add('is-exploring');
     const btn = s.querySelector('[data-villa-explore]'); btn.setAttribute('aria-expanded', 'true'); btn.querySelector('span').textContent = `Close ${s.dataset.short}`;
     const rooms = s.querySelector('.villa__rooms'); rooms.hidden = false;
     const rows = rooms.querySelectorAll('.room'), marks = s.querySelectorAll('.mark');
@@ -90,7 +85,7 @@ export function initVilla() {
     if (exploring !== s) return; exploring = null; s.classList.remove('is-exploring');
     const btn = s.querySelector('[data-villa-explore]'); btn.setAttribute('aria-expanded', 'false'); btn.querySelector('span').textContent = `Explore ${s.dataset.short}`;
     const rooms = s.querySelector('.villa__rooms'), rows = rooms.querySelectorAll('.room'), marks = s.querySelectorAll('.mark');
-    const done = () => { rooms.hidden = true; ScrollTrigger.refresh(); if (!fast) start(); };
+    const done = () => { rooms.hidden = true; ScrollTrigger.refresh(); };
     if (REDUCED || fast) { gsap.set([rows, marks], { opacity: 0 }); done(); return; }
     gsap.to(marks, { opacity: 0, scale: 0.5, duration: DUR.s, ease: 'in', overwrite: true });
     gsap.to(rows, { opacity: 0, duration: DUR.s, ease: 'in', overwrite: true, onComplete: done });
