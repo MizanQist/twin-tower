@@ -1,0 +1,48 @@
+/* section 8 — amenities: a full-viewport night stage, one image per amenity, a vertical tab list with a sliding highlight */
+/* the stage runs one crown taller than the viewport so the next section's arch rises over image, never over the words */
+.amen { --arch: 16vw; position: relative; height: calc(100svh + var(--arch)); min-height: calc(680px + var(--arch)); overflow: clip; background: var(--night); color: var(--cream); }
+.amen__stage { position: absolute; inset: 0; }
+.amen__slide { position: absolute; inset: 0; display: none; }
+.amen__media { position: absolute; inset: -8% 0; }
+.amen__media picture, .amen__media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.amen__scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(var(--night-rgb) / 0.55) 0, rgb(var(--night-rgb) / 0.08) 24%, rgb(var(--night-rgb) / 0.12) 48%, rgb(var(--night-rgb) / 0.86) 82%, rgb(var(--night-rgb) / 0.9) 100%); pointer-events: none; }
+.amen__eyebrow { position: absolute; left: var(--margin); top: 14svh; margin: 0; color: rgb(var(--cream-rgb) / 0.55); display: flex; gap: 18px; align-items: baseline; }
+.amen__eyebrow b { font: 400 15px / 1 var(--font-display); color: var(--cream); font-variant-numeric: tabular-nums; }
+.amen__eyebrow b small { font-size: 0.8em; color: rgb(var(--cream-rgb) / 0.5); margin-left: 6px; }
+
+/* the tab list, bottom left */
+.amen__tabs { position: absolute; left: var(--margin); bottom: calc(12svh + var(--arch)); display: grid; grid-template-columns: 1px auto; column-gap: 26px; }
+.amen__line { position: relative; width: 1px; background: rgb(var(--cream-rgb) / 0.22); }
+.amen__hilite { position: absolute; left: 0; top: 0; width: 1px; height: 0; background: var(--cream); }
+.amen__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.amen__tab { display: block; background: none; border: 0; padding: 10px 0; color: rgb(var(--cream-rgb) / 0.5); text-align: left; cursor: pointer; font: 400 var(--fs-label) / 1 var(--font-sans); text-transform: uppercase; letter-spacing: 0.25em; transition: color var(--dur-m) var(--ease-out); white-space: nowrap; }
+.amen__tab:hover, .amen__tab:focus-visible, .amen__tab[aria-selected="true"] { color: var(--cream); }
+.amen__tab:focus-visible { outline: 1px solid var(--cream); outline-offset: 4px; }
+
+/* the active amenity, bottom right */
+.amen__text { position: absolute; right: var(--margin); bottom: calc(12svh + var(--arch)); width: min(38vw, 560px); }
+.amen__name { font: 400 clamp(2rem, 3.6vw, 3.8rem) / 1.06 var(--font-display); letter-spacing: -0.015em; margin: 0 0 2.4svh; }
+.amen__desc { font: 400 clamp(0.9375rem, 0.85rem + 0.3vw, 1.0625rem) / 1.7 var(--font-sans); color: rgb(var(--cream-rgb) / 0.78); margin: 0; max-width: 30em; }
+
+/* the ring: book a viewing */
+.amen__cta { position: absolute; right: var(--margin); top: 34svh; translate: 0 0; width: 136px; height: 136px; border-radius: 50%; display: grid; place-items: center; text-align: center; color: var(--cream); text-decoration: none; }
+.amen__cta-ring { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: rgb(var(--cream-rgb) / 0.4); stroke-width: 1; transform: rotate(-90deg); }
+.amen__cta-arc { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--cream); stroke-width: 1; transform: rotate(-90deg); stroke-dasharray: 1 1000; transition: stroke-dasharray var(--dur-l) var(--ease-in-out); }
+.amen__cta:hover .amen__cta-arc, .amen__cta:focus-visible .amen__cta-arc { stroke-dasharray: 420 1000; }
+.amen__cta span { position: relative; font: 400 var(--fs-label-sm) / 1.7 var(--font-sans); text-transform: uppercase; letter-spacing: 0.25em; width: 7em; }
+.amen__cta:focus-visible { outline: none; }
+
+@media (max-width: 991px), (orientation: portrait) {
+  .amen { --arch: 26vw; min-height: calc(640px + var(--arch)); }
+  .amen__scrim { background: linear-gradient(180deg, rgb(var(--night-rgb) / 0.6) 0, rgb(var(--night-rgb) / 0.1) 22%, rgb(var(--night-rgb) / 0.2) 40%, rgb(var(--night-rgb) / 0.92) 66%, var(--night) 100%); }
+  .amen__eyebrow { top: 12svh; }
+  .amen__cta { display: none; }
+  .amen__text { right: auto; left: var(--margin); bottom: calc(18svh + var(--arch)); width: calc(100vw - 2 * var(--margin)); }
+  .amen__name { font-size: clamp(1.9rem, 8vw, 2.6rem); }
+  .amen__tabs { left: 0; right: 0; bottom: calc(6svh + var(--arch)); grid-template-columns: 1fr; column-gap: 0; }
+  .amen__line { display: none; }
+  .amen__list { flex-direction: row; gap: 22px; overflow-x: auto; scrollbar-width: none; padding: 0 var(--margin); scroll-snap-type: x proximity; }
+  .amen__list::-webkit-scrollbar { display: none; }
+  .amen__tab { padding: 10px 0; scroll-snap-align: start; border-bottom: 1px solid transparent; }
+  .amen__tab[aria-selected="true"] { border-bottom-color: var(--cream); }
+}

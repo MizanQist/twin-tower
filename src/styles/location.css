@@ -1,0 +1,37 @@
+/* section 5 — location: the real map of Katampe in the night palette, the route to Maitama drawn in */
+.location { position: relative; min-height: 100svh; background: var(--night); color: var(--cream); overflow: clip; display: grid; grid-template-columns: 36vw 1fr; }
+.location__text { position: relative; z-index: 2; padding: 14svh var(--margin) 10svh; align-self: start; }
+.location__eyebrow { color: rgb(var(--cream-rgb) / 0.5); margin-bottom: 3.2svh; }
+.location__title { font: 400 clamp(2.4rem, 4.85vw, 5.2rem) / 1.04 var(--font-display); letter-spacing: -0.02em; margin: 0 0 4svh; }
+.location__line { display: block; }
+.location__body { font: 400 clamp(0.9375rem, 0.85rem + 0.3vw, 1.125rem) / 1.75 var(--font-sans); color: rgb(var(--cream-rgb) / 0.68); max-width: 30em; margin: 0 0 5svh; }
+.location__facts li { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 0.85em 0; border-bottom: 1px solid rgb(var(--cream-rgb) / 0.16); }
+.location__facts .t-label { color: rgb(var(--cream-rgb) / 0.5); font-size: var(--fs-label-sm); }
+.location__facts b { font: 400 clamp(1.1rem, 1.4vw, 1.5rem) / 1 var(--font-display); }
+.location__map { position: absolute; inset: 0 0 0 30vw; }
+.location__plate { position: absolute; inset: 0; }
+.location__map picture, .location__map img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; display: block; }
+.location__overlay { position: absolute; inset: 0; width: 100%; height: 100%; font-family: var(--font-sans); }
+.location__districts text { font-size: 22px; letter-spacing: 0.3em; text-transform: uppercase; fill: rgb(var(--cream-rgb) / 0.42); }
+.location__route { stroke: var(--cream); stroke-width: 2; stroke-dasharray: 6 8; }
+.location__pin-ring { fill: none; stroke: var(--cream); stroke-width: 2; }
+.location__pin-pulse { fill: none; stroke: var(--cream); stroke-width: 2; opacity: 0; transform-origin: center; transform-box: fill-box; }
+.location__pin-dot { fill: var(--cream); }
+.location__site { font-family: var(--font-display); font-size: 40px; fill: var(--cream); }
+.location__site-sub { font-size: 18px; letter-spacing: 0.3em; text-transform: uppercase; fill: rgb(var(--cream-rgb) / 0.6); }
+.location__min { font-size: 20px; letter-spacing: 0.3em; text-transform: uppercase; fill: var(--cream); }
+.location__credit { position: absolute; right: var(--margin); bottom: 1.8svh; margin: 0; font: 400 10px / 1 var(--font-sans); letter-spacing: 0.08em; color: rgb(var(--cream-rgb) / 0.35); }
+.location__scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, var(--night) 28vw, rgb(var(--night-rgb) / 0.85) 40vw, rgb(var(--night-rgb) / 0) 58vw); }
+@media (max-width: 991px), (orientation: portrait) {
+  .location { grid-template-columns: 1fr; min-height: auto; }
+  .location__text { padding: 12svh var(--margin) 6svh; }
+  .location__title { font-size: clamp(2.2rem, 9.2vw, 3rem); }
+  .location__text { order: 1; }
+  .location__map { order: 2; position: relative; inset: auto; height: 80svh; }
+  .location__plate { position: absolute; inset: auto; width: 180vw; aspect-ratio: 16 / 10; left: -42vw; top: calc(40svh - 51.75vw); }
+  .location__scrim { background: linear-gradient(180deg, var(--night) 0, rgb(var(--night-rgb) / 0) 12%); }
+  .location__districts text { font-size: 34px; }
+  .location__site { font-size: 56px; }
+  .location__site-sub, .location__min { font-size: 26px; }
+  .location__credit { bottom: 16px; right: 16px; }
+}

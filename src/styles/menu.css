@@ -1,0 +1,10 @@
+.menu { position: fixed; inset: 0; z-index: 40; }
+.menu__overlay { position: absolute; inset: 0; background: rgb(var(--night-rgb) / 0.6); opacity: 0; }
+.menu__sheet { position: absolute; inset: 0; background: var(--night); color: var(--cream); padding: 12svh var(--margin) calc(24px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; }
+.menu__nav { display: flex; flex-direction: column; gap: 32px; }
+.menu__item { font: 400 var(--fs-menu) / 1 var(--font-display); letter-spacing: -0.02em; }
+.menu__rule { display: block; height: 1px; background: rgb(var(--gold-rgb) / 0.3); margin-block: 36px; }
+.menu__num { font: 400 var(--fs-menu-num) / 1 var(--font-display); user-select: all; }
+.menu__foot { margin-top: auto; display: flex; flex-direction: column; gap: 20px; }
+.menu__mark { width: 160px; height: auto; fill: currentColor; }
+.menu__meta { color: rgb(var(--cream-rgb) / 0.44); font-size: var(--fs-label-sm); }

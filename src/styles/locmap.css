@@ -1,0 +1,67 @@
+/* the interactive map, in the night palette */
+.locmap { position: absolute; inset: 0 0 0 30vw; z-index: 1; isolation: isolate; }
+.locmap__map { position: absolute; inset: 0; background: var(--night); }
+.locmap .leaflet-container { background: var(--night); font-family: var(--font-sans); }
+.locmap .lm-tiles { filter: invert(1) grayscale(1) brightness(0.62) contrast(0.9) sepia(0.28); }
+.locmap.is-aerial .lm-tiles { filter: none; }
+.locmap .leaflet-control-zoom { border: 0; box-shadow: none; margin: 0 var(--margin) 11svh 0; }
+.locmap .leaflet-control-zoom a { width: 36px; height: 36px; line-height: 36px; background: rgb(var(--night-rgb) / 0.8); color: var(--cream); border: 1px solid rgb(var(--cream-rgb) / 0.2); font: 400 18px/36px var(--font-sans); }
+.locmap .leaflet-control-zoom a:hover { background: var(--cream); color: var(--ink); }
+.locmap .leaflet-control-attribution { background: rgb(var(--night-rgb) / 0.75); color: rgb(var(--cream-rgb) / 0.45); font: 400 10px/1.4 var(--font-sans); padding: 2px 8px; margin: 0; }
+.locmap .leaflet-control-attribution a { color: rgb(var(--cream-rgb) / 0.6); }
+.locmap__ctl { position: absolute; top: 12svh; right: var(--margin); z-index: 500; display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+.locmap__seg { display: inline-flex; border: 1px solid rgb(var(--cream-rgb) / 0.25); background: rgb(var(--night-rgb) / 0.75); backdrop-filter: blur(6px); }
+.locmap__seg button { padding: 10px 14px; font: 400 10px/1 var(--font-sans); letter-spacing: 0.25em; text-transform: uppercase; color: rgb(var(--cream-rgb) / 0.7); transition: background-color var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out); }
+.locmap__seg button + button { border-left: 1px solid rgb(var(--cream-rgb) / 0.2); }
+.locmap__seg button[aria-pressed="true"] { background: var(--cream); color: var(--ink); }
+.locmap__hint { position: absolute; left: 50%; top: 12svh; translate: -50% 0; z-index: 500; margin: 0; padding: 10px 14px; background: rgb(var(--night-rgb) / 0.75); color: rgb(var(--cream-rgb) / 0.75); font-size: var(--fs-micro); white-space: nowrap; pointer-events: none; transition: opacity var(--dur-m) var(--ease-out); }
+.locmap__hint.is-off { opacity: 0; }
+.locmap__lock { position: absolute; left: 50%; bottom: 11svh; translate: -50% 0; z-index: 500; padding: 12px 18px; background: var(--cream); color: var(--ink); font-size: var(--fs-micro); }
+.locmap__lock[hidden] { display: none; }
+.locmap .leaflet-marker-icon { background: none; border: 0; }
+.lm-label { pointer-events: none; }
+.lm-label span { position: absolute; translate: -50% -50%; font: 400 11px/1 var(--font-sans); letter-spacing: 0.3em; text-transform: uppercase; color: rgb(var(--cream-rgb) / 0.45); white-space: nowrap; }
+.lm-label.ring span { font-size: 9px; letter-spacing: 0.2em; color: rgb(var(--cream-rgb) / 0.4); background: var(--night); padding: 2px 6px; }
+.lm-pin { position: relative; }
+.lm-pin i { position: absolute; left: -11px; top: -11px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--cream); background: rgb(var(--night-rgb) / 0.85); color: var(--cream); font: 400 10px/20px var(--font-display); text-align: center; transition: background-color var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out), transform var(--dur-s) var(--ease-out); }
+.lm-pin b { position: absolute; left: 16px; top: -7px; font: 400 11px/1.2 var(--font-sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream); white-space: nowrap; text-shadow: 0 0 6px var(--night), 0 0 2px var(--night); }
+.lm-pin.hi i, .lm-pin.on i { background: var(--cream); color: var(--ink); transform: scale(1.15); }
+.lm-pin--site i { width: 30px; height: 30px; left: -15px; top: -15px; line-height: 28px; background: var(--cream); color: var(--ink); }
+.lm-pin--site i::after { content: ""; position: absolute; inset: -1px; border-radius: 50%; border: 1px solid var(--cream); animation: lm-pulse 2.4s cubic-bezier(0.5, 0, 0.75, 0) infinite; }
+.lm-pin--site b { left: 22px; top: -8px; font-family: var(--font-display); font-size: 15px; letter-spacing: 0; text-transform: none; }
+@keyframes lm-pulse { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(2.4); opacity: 0; } }
+.lm-popw .leaflet-popup-content-wrapper { background: var(--cream-2); color: var(--ink); border-radius: 0; box-shadow: 0 12px 32px rgb(0 0 0 / 0.35); }
+.lm-popw .leaflet-popup-content { margin: 18px 20px; font-family: var(--font-sans); }
+.lm-popw .leaflet-popup-tip { background: var(--cream-2); }
+.lm-popw .leaflet-popup-close-button { color: var(--ink); }
+.lm-pop { display: flex; flex-direction: column; gap: 6px; }
+.lm-pop__k { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.5); }
+.lm-pop__n { font: 400 20px/1.1 var(--font-display); }
+.lm-pop__s { font-size: 12px; line-height: 1.5; color: rgb(var(--ink-rgb) / 0.65); }
+.lm-pop__m { font-size: 12px; color: rgb(var(--ink-rgb) / 0.65); }
+.lm-pop__m b { font: 400 15px/1 var(--font-display); color: var(--ink); }
+.lm-pop__a { margin-top: 6px; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink); border-bottom: 1px solid var(--ink); align-self: flex-start; padding-bottom: 2px; }
+/* the list in the text column */
+.locmap__list { margin-top: 2svh; border-top: 1px solid rgb(var(--cream-rgb) / 0.16); }
+.locmap__list li { border-bottom: 1px solid rgb(var(--cream-rgb) / 0.16); }
+.lm-row { width: 100%; display: grid; grid-template-columns: 2.2em 1fr auto; align-items: center; gap: 12px; padding: 0.95em 0; text-align: left; color: var(--cream); transition: color var(--dur-s) var(--ease-out); }
+.lm-row__i { font: 400 12px/1 var(--font-display); color: rgb(var(--cream-rgb) / 0.5); }
+.lm-row__t { min-width: 0; font: 400 clamp(0.95rem, 1.1vw, 1.15rem) / 1.2 var(--font-display); display: flex; flex-direction: column; gap: 3px; }
+.lm-row__t small { font: 400 11px/1.4 var(--font-sans); color: rgb(var(--cream-rgb) / 0.5); }
+.lm-row__d { font: 400 clamp(1rem, 1.3vw, 1.4rem) / 1 var(--font-display); white-space: nowrap; }
+.lm-row__d small { font: 400 9px/1 var(--font-sans); letter-spacing: 0.2em; text-transform: uppercase; margin-left: 4px; color: rgb(var(--cream-rgb) / 0.5); }
+.lm-row.hi, .lm-row.on { color: var(--cream); }
+.lm-row.hi .lm-row__i, .lm-row.on .lm-row__i { color: var(--cream); }
+.lm-row.on { background: linear-gradient(90deg, rgb(var(--cream-rgb) / 0.06), transparent); }
+.locmap__foot { margin-top: 2svh; font: 400 11px/1.6 var(--font-sans); color: rgb(var(--cream-rgb) / 0.42); max-width: 30em; }
+@media (max-width: 991px), (orientation: portrait) {
+  .locmap { position: relative; inset: auto; height: 72svh; }
+  .locmap__ctl { top: 16px; right: 16px; }
+  .locmap__hint { display: none; }
+  .locmap__lock { bottom: 56px; }
+  .locmap .leaflet-control-zoom { margin: 0 16px 56px 0; }
+  .location__credit { bottom: 20px; right: 16px; }
+}
+
+/* Phone: numbered pins read against the list; only the chosen pin and the site carry a label. */
+@media (max-width: 991px), (orientation: portrait) { .lm-pin:not(.lm-pin--site):not(.on):not(.hi) b { display: none; } }

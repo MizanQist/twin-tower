@@ -1,0 +1,17 @@
+/* section 3 — the full-bleed dark spread with the brochure's pull quote */
+.quote { position: relative; height: 100svh; min-height: 640px; overflow: clip; background: var(--night); color: var(--cream); }
+.quote__media { position: absolute; inset: -12% 0; will-change: transform; }
+.quote__media picture, .quote__media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; display: block; }
+.quote__scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(var(--night-rgb) / 0.35) 0, rgb(var(--night-rgb) / 0.1) 30%, rgb(var(--night-rgb) / 0.15) 60%, rgb(var(--night-rgb) / 0.7) 100%); pointer-events: none; }
+.quote__inner { position: absolute; inset: 0; }
+.quote__eyebrow { position: absolute; left: 50%; top: 24svh; translate: -50% 0; color: rgb(var(--cream-rgb) / 0.6); white-space: nowrap; }
+.quote__text { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: min(64vw, 920px); margin: 0; text-align: center; font: 400 clamp(1.75rem, 3.2vw, 3rem) / 1.2 var(--font-display); letter-spacing: -0.01em; }
+.quote__text p { margin: 0; }
+.quote__credit { position: absolute; left: var(--margin); bottom: 9.5svh; color: rgb(var(--cream-rgb) / 0.6); white-space: nowrap; }
+.quote__tags { position: absolute; right: var(--margin); bottom: 15svh; text-align: right; color: rgb(var(--cream-rgb) / 0.5); display: flex; flex-direction: column; gap: 10px; font-size: var(--fs-label-sm); }
+@media (max-width: 991px), (orientation: portrait) {
+  .quote__eyebrow { top: 16svh; }
+  .quote__text { width: 84vw; font-size: clamp(1.5rem, 6.4vw, 2rem); }
+  .quote__credit { bottom: 14svh; white-space: normal; max-width: 60vw; line-height: 1.6; }
+  .quote__tags { display: none; }
+}

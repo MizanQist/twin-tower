@@ -1,0 +1,60 @@
+/* section 2 — the next page of the brochure, laid over the photograph */
+.page { position: relative; z-index: 2; margin-top: calc(-1 * (100svh + var(--crown))); min-height: calc(var(--crown) + 100svh); background: var(--cream); color: var(--ink); border-radius: 50vw 50vw 0 0 / var(--crown) var(--crown) 0 0; overflow: clip visible; }
+.page::before { content: ""; position: absolute; left: -12px; right: -12px; top: -12px; height: calc(var(--crown) + 12px); border: 1px solid var(--rule-gold); border-bottom: 0; border-radius: calc(50vw + 12px) calc(50vw + 12px) 0 0 / calc(var(--crown) + 12px) calc(var(--crown) + 12px) 0 0; clip-path: inset(0 calc(var(--margin) + 12px) 0 calc(var(--margin) + 12px)); pointer-events: none; }
+.page__crown { position: relative; height: var(--crown); display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding-bottom: 24px; }
+.page__arc { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.page__arc-text { font: 400 7.64px / 1 var(--font-sans); letter-spacing: 0.32em; text-transform: uppercase; fill: rgb(var(--ink-rgb) / 0.55); }
+.page__statement { text-align: center; max-width: 1296px; padding-inline: var(--margin); }
+.page__line { display: block; }
+.page__statement em { display: inline-block; }
+.page__body { position: relative; min-height: 100svh; overflow: clip; }
+.page__initial { position: absolute; right: -14vw; top: 0; font: 400 var(--fs-watermark) / 1 var(--font-display); color: var(--watermark); user-select: none; pointer-events: none; }
+.page__meta { position: absolute; left: var(--margin); bottom: 4.2svh; color: rgb(var(--ink-rgb) / 0.5); white-space: nowrap; }
+@media (max-width: 991px), (orientation: portrait) {
+  .page__arc-text { font-size: 10px; }
+  .page__crown { height: auto; min-height: var(--crown); padding: calc(var(--crown) * 0.85) var(--margin) 32px; }
+  .page__statement { font-size: 30px; max-width: 340px; }
+}
+
+/* ---------- three reasons: a pinned stage, one reason per screen of scroll ---------- */
+.reasons { position: relative; height: calc(3 * 100svh + 40svh); padding-top: 24svh; box-sizing: content-box; }
+.reasons__sticky { position: sticky; top: 0; height: 100svh; overflow: clip; }
+.reasons__eyebrow { position: absolute; left: var(--margin); top: calc(13.2svh - var(--jo-captop)); color: rgb(var(--ink-rgb) / 0.5); }
+.reasons__index { position: absolute; left: var(--margin); top: calc(19.5svh - var(--pf-captop)); font: 400 clamp(1.25rem, 1.53vw, 1.75rem) / 1 var(--font-display); display: flex; align-items: baseline; gap: 0.4em; }
+.reasons__num { display: inline-block; overflow: clip; }
+.reasons__of { font: 400 var(--fs-label-sm) / 1 var(--font-sans); letter-spacing: 0.25em; color: rgb(var(--ink-rgb) / 0.5); }
+.reasons__list { position: absolute; left: var(--margin); top: 30svh; width: 36vw; }
+.reason { position: absolute; inset: 0 auto auto 0; width: 100%; visibility: hidden; }
+.reason.is-active { visibility: visible; }
+.reason__title { font: 400 clamp(2.4rem, 4.3vw, 4.2rem) / 1.04 var(--font-display); letter-spacing: -0.02em; margin: 0 0 3svh; }
+.reason__line { display: block; }
+.reason__text { font: 400 clamp(0.9375rem, 0.85rem + 0.3vw, 1.125rem) / 1.7 var(--font-sans); color: rgb(var(--ink-rgb) / 0.68); max-width: 34em; margin: 0 0 3.2svh; }
+.reason__facts { display: flex; flex-wrap: wrap; gap: 10px 0; color: rgb(var(--ink-rgb) / 0.55); font-size: var(--fs-micro); }
+.reason__facts li { display: flex; align-items: center; }
+.reason__facts li + li::before { content: ""; display: inline-block; width: 1px; height: 10px; background: var(--rule-gold); margin: 0 16px; }
+.reasons__frame { position: absolute; left: 46vw; right: var(--margin); top: 13.2svh; height: 62svh; border: 1px solid var(--hairline); background: var(--cream); }
+.reasons__media { position: absolute; inset: 0; overflow: clip; visibility: hidden; }
+.reasons__media.is-active { visibility: visible; }
+.reasons__media picture, .reasons__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.reasons__media--plan img { object-fit: contain; padding: 3%; }
+.reasons__tick { position: absolute; width: 24px; height: 24px; border: 1px solid var(--rule-gold); pointer-events: none; }
+.reasons__tick--tl { left: 12px; top: 12px; border-right: 0; border-bottom: 0; }
+.reasons__tick--tr { right: 12px; top: 12px; border-left: 0; border-bottom: 0; }
+.reasons__tick--bl { left: 12px; bottom: 12px; border-right: 0; border-top: 0; }
+.reasons__tick--br { right: 12px; bottom: 12px; border-left: 0; border-top: 0; }
+.reasons__progress { position: absolute; left: var(--margin); right: var(--margin); top: 86svh; display: flex; gap: 12px; }
+.reasons__progress i { flex: 1; height: 1px; background: var(--hairline); position: relative; overflow: clip; }
+.reasons__progress i::after { content: ""; position: absolute; inset: 0; background: var(--ink); transform: scaleX(var(--p, 0)); transform-origin: left center; }
+
+@media (max-width: 991px), (orientation: portrait) {
+  .reasons { height: auto; padding-top: 0; }
+  .reasons__sticky { position: static; height: auto; overflow: visible; padding: 10svh var(--margin) 14svh; }
+  .reasons__eyebrow, .reasons__index, .reasons__frame, .reasons__progress { display: none; }
+  .reasons__list { position: static; width: auto; }
+  .reason { position: static; visibility: visible; margin-bottom: 14svh; }
+  .reason__media-m { width: 100%; aspect-ratio: 4 / 3; border: 1px solid var(--hairline); overflow: clip; margin-bottom: 24px; background: var(--cream); }
+  .reason__media-m img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .reason__media-m.is-plan img { object-fit: contain; padding: 3%; }
+  .reason__num-m { font: 400 1.25rem / 1 var(--font-display); margin-bottom: 14px; }
+  .reason__title { font-size: clamp(2.2rem, 9.5vw, 3rem); }
+}

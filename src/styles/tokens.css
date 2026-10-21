@@ -1,0 +1,130 @@
+:root {
+  /* Twin-Tower palette: warm paper, ink, a cooler city night, and the champagne-bronze of the fins as the one accent */
+  --cream: #f6f3ec;
+  --cream-2: #ece7dc;
+  --ink: #1b1a17;        /* text on cream, dark cards */
+  --night: #17181b;      /* cover / preloader / hero cover state */
+  --night-deep: #111216; /* closing page, footer */
+  --gold: #b8803c;       /* the one accent: champagne bronze */
+  --gold-deep: #8f5f24;  /* small accent text on cream */
+  --ink-rgb: 27 26 23;
+  --cream-rgb: 246 243 236;
+  --gold-rgb: 184 128 60;
+
+  /* Type */
+  --font-display: "Instrument Serif", "Instrument Serif Fallback", Georgia, serif;
+  --font-sans: "Jost", "Jost Fallback", "Helvetica Neue", Arial, sans-serif;
+
+  /* Motion vocabulary (the reference site's constants) */
+  --dur-s: 0.4s;
+  --dur-m: 0.8s;
+  --dur-l: 1.2s;
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in: cubic-bezier(0.5, 0, 0.75, 0);
+  --ease-in-out: cubic-bezier(0.75, 0, 0.25, 1);
+  --ease-dive: cubic-bezier(0.6, 0, 0, 1);
+
+  /* Layout */
+  --margin: 5vw;                 /* the brochure's outer margin */
+  --nav-w: 184px;                /* the nav slot: wide enough for 'Request a meeting' */
+  --gutter: clamp(20px, 5vw, 96px);
+}
+
+/* Surface themes: every secondary colour is a core colour at a fixed opacity, as in the brochure */
+:root, [data-surface="light"] {
+  --bg: var(--cream);
+  --fg: var(--ink);
+  --fg-muted: rgb(var(--ink-rgb) / 0.5);
+  --fg-caption: rgb(var(--ink-rgb) / 0.65);
+  --hairline: rgb(var(--ink-rgb) / 0.12);
+  --hairline-soft: rgb(var(--ink-rgb) / 0.1);
+  --rule-gold: rgb(var(--gold-rgb) / 0.4);
+  --border-gold: rgb(var(--gold-rgb) / 0.25);
+  --watermark: rgb(var(--gold-rgb) / 0.04);
+}
+[data-surface="dark"] {
+  --bg: var(--night);
+  --fg: var(--cream);
+  --fg-muted: rgb(var(--cream-rgb) / 0.5);
+  --fg-caption: rgb(var(--cream-rgb) / 0.65);
+  --fg-label: rgb(var(--cream-rgb) / 0.44);
+  --fg-meta: rgb(var(--cream-rgb) / 0.28);
+  --hairline: rgb(var(--gold-rgb) / 0.3);
+  --hairline-soft: rgb(var(--gold-rgb) / 0.2);
+  --rule-gold: rgb(var(--gold-rgb) / 0.4);
+  --watermark: rgb(var(--gold-rgb) / 0.035);
+  color-scheme: dark;
+}
+
+/* ---- the cover and the hero ---- */
+:root {
+  --night-rgb: 23 24 27;
+  --veil-cover: 0.935;
+  --grain-cover: 0.035;
+  --grain-rest: 0.025;
+  --scrim-top: linear-gradient(180deg, rgb(var(--night-rgb) / 0.58) 0, rgb(var(--night-rgb) / 0.52) 12svh, rgb(var(--night-rgb) / 0.3) 20svh, rgb(var(--night-rgb) / 0) 32svh);
+  --ramp: linear-gradient(180deg, rgb(var(--night-rgb) / 0) 30svh, rgb(var(--night-rgb) / 0.22) 38svh, rgb(var(--night-rgb) / 0.52) 44svh, rgb(var(--night-rgb) / 0.66) 52svh, rgb(var(--night-rgb) / 0.76) 62svh, rgb(var(--night-rgb) / 0.76) 76svh, rgb(var(--night-rgb) / 0.68) 100svh);
+  --bleed: linear-gradient(180deg, rgb(var(--night-rgb) / 0) 70svh, rgb(var(--night-rgb) / 0.5) 100svh);
+  --cta-disc: rgb(var(--night-rgb) / 0.35);
+
+  --rule-on-night: rgb(var(--gold-rgb) / 0.3);
+  --rule-text-on-night: rgb(var(--gold-rgb) / 0.35);
+  --rule-foot-on-night: rgb(var(--gold-rgb) / 0.2);
+  --rule-on-image: rgb(var(--cream-rgb) / 0.22);
+  --rule-on-light: rgb(var(--ink-rgb) / 0.12);
+
+  --plate-ratio: 0.9003;
+  --crown: 22vw;
+  --hero-screens: 4;
+
+  /* type scale (390 / 1440 / 1920) */
+  --fs-display: clamp(6rem, 11vw, 14rem);
+  --fs-display-sub: 0.45em;
+  --fs-tagline: clamp(1.625rem, 2.78vw, 3.25rem);
+  --fs-h1: clamp(2.375rem, 1.5rem + 3.6vw, 5.8rem);
+  --fs-nav-big: clamp(1.25rem, 1.53vw, 1.75rem);
+  --fs-counter: clamp(1.75rem, 2.22vw, 2.5rem);
+  --fs-fact-num: clamp(1.0625rem, 0.994rem + 0.2857vw, 1.375rem);
+  --fs-fact-unit: 0.7em;
+  --fs-fact-label: clamp(0.5625rem, 0.5275rem + 0.143vw, 0.6875rem);
+  --fs-address: clamp(0.75rem, 0.72rem + 0.14vw, 0.875rem);
+  --fs-label: 0.6875rem;
+  --fs-label-sm: 0.625rem;
+  --fs-micro: 0.5625rem;
+  --fs-menu: clamp(2.25rem, 10.25vw, 2.5rem);
+  --fs-menu-num: clamp(2.5rem, 11.3vw, 3.25rem);
+  --fs-watermark: 46.6vw;
+
+  /* baseline/cap-top offsets with line-height 1 (from the fonts' hhea metrics) */
+  --pf-baseline: 0.84em;    /* Instrument Serif: (asc .99 - desc .31 + 1) / 2 with line-height 1 */
+  --pf-captop: 0.12em;      /* Instrument Serif: baseline - cap .72 */
+  --jo-baseline: 0.8475em;  /* Jost */
+  --jo-captop: 0.1475em;
+}
+@media (max-width: 991px), (orientation: portrait) {
+  :root {
+    --plate-ratio: 2.1668;
+    --crown: 30vw;
+    --hero-screens: 3;
+    --scrim-top: linear-gradient(180deg, rgb(var(--night-rgb) / 0.7) 0, rgb(var(--night-rgb) / 0.55) 14svh, rgb(var(--night-rgb) / 0.12) 30svh, rgb(var(--night-rgb) / 0) 38svh);
+    --ramp: linear-gradient(180deg, rgb(var(--night-rgb) / 0) 26svh, rgb(var(--night-rgb) / 0.25) 36svh, rgb(var(--night-rgb) / 0.55) 46svh, rgb(var(--night-rgb) / 0.75) 56svh, rgb(var(--night-rgb) / 0.86) 72svh, rgb(var(--night-rgb) / 0.92) 100svh);
+  }
+}
+
+/* type classes */
+.t-display { font: 400 var(--fs-display) / 1 var(--font-display); letter-spacing: -0.03em; }
+.t-display em { font-style: normal; font-size: var(--fs-display-sub); letter-spacing: -0.03em; }
+.t-tagline { font: 400 var(--fs-tagline) / 1.1 var(--font-display); letter-spacing: -0.02em; text-align: right; }
+.t-tagline em { font-style: normal; }
+.t-label { font: 400 var(--fs-label) / 1 var(--font-sans); text-transform: uppercase; letter-spacing: 0.25em; }
+.t-eyebrow { letter-spacing: 0.6em; }
+.t-address { font: 400 var(--fs-address) / 1.4 var(--font-sans); text-transform: uppercase; letter-spacing: 0.14em; }
+.t-nav-big { font: 400 var(--fs-nav-big) / 1 var(--font-display); }
+.t-nav-sm { font: 400 var(--fs-label-sm) / 1 var(--font-sans); text-transform: uppercase; letter-spacing: 0.32em; }
+.t-counter { font: 400 var(--fs-counter) / 1 var(--font-display); font-variant-numeric: tabular-nums; color: var(--cream); }
+.t-fact-num { font: 400 var(--fs-fact-num) / 1 var(--font-display);  }
+.t-fact-num small { font-size: var(--fs-fact-unit); margin-left: 0.2em; }
+.t-fact-label { font: 400 var(--fs-fact-label) / 1 var(--font-sans); text-transform: uppercase; letter-spacing: 0.3em; color: rgb(var(--cream-rgb) / 0.7); margin-left: 0.4em; }
+.t-h1 { font: 400 var(--fs-h1) / 1.05 var(--font-display); letter-spacing: -0.025em; }
+.t-h1 em { font-style: normal; }
+.t-right { margin-right: -0.25em; }

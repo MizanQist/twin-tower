@@ -1,0 +1,89 @@
+/* ---------- geometry ---------- */
+.hero { position: relative; background: var(--night); color: var(--cream); }
+.hero__area { height: calc(var(--hero-screens) * 100svh + var(--crown)); position: relative; }
+.hero__sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: clip; }
+
+.hero__media { position: absolute; inset: 0 0 auto 0; will-change: transform; }
+.hero__plate { position: relative; }
+.hero__img, .hero__img img { display: block; width: 100vw; height: max(100lvh, calc(100vw * var(--plate-ratio))); object-fit: cover; object-position: 50% 0; }
+
+/* veils: z1 bleed · z1 ramp · z2 flat · z3 grain · z4 scrim */
+.hero__veil, .hero__grain, .hero__scrim { position: absolute; inset: 0; pointer-events: none; }
+.hero__veil--bleed { background: var(--bleed); z-index: 1; }
+.hero__veil--ramp { background: var(--ramp); z-index: 1; opacity: 0; }
+.hero__veil--flat { background: var(--night); z-index: 2; opacity: var(--veil-cover); }
+.hero__grain { z-index: 3; opacity: var(--grain-cover); mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 256px 256px; }
+.hero__scrim { z-index: 4; background: var(--scrim-top); }
+
+/* ---------- the printed page ---------- */
+.hero__page { position: absolute; inset: 0; z-index: 5; pointer-events: none; will-change: transform; transform-origin: left bottom; }
+.hero__page > * { position: absolute; margin: 0; }
+.hero__eyebrow { left: var(--margin); top: calc(44.9svh - var(--jo-captop)); color: var(--cream); white-space: nowrap; }
+.hero__short { left: var(--margin); top: 48.6svh; width: 50px; height: 1px; background: var(--gold); transform-origin: left center; }
+.hero__title { inset: 0; }
+.hero__title-a, .hero__title-b { position: absolute; left: var(--margin); white-space: nowrap; }
+.hero__title-a { top: calc(66.3svh - var(--pf-baseline)); font-size: var(--fs-display); }
+.hero__title-b { top: calc(75.7svh - var(--pf-baseline)); font-size: calc(var(--fs-display) * 0.45); }
+.hero__counter { left: var(--margin); top: calc(80.2svh - var(--pf-baseline)); font-size: var(--fs-counter); display: flex; align-items: baseline; gap: 12px; white-space: nowrap; }
+.hero__counter-label { font-size: var(--fs-micro); color: rgb(var(--cream-rgb) / 0.44); }
+.hero__rule { left: var(--margin); top: 81.1svh; width: 51vw; height: 1px; background: var(--rule-text-on-night); transform-origin: left center; transform: scaleX(0); }
+.hero__address { left: var(--margin); top: calc(85.1svh - var(--jo-captop)); line-height: 1; white-space: nowrap; }
+.hero__tagline { right: var(--margin); top: calc(70.8svh - 0.83em); white-space: nowrap; }
+.hero__tagline em { display: inline-block; }
+.hero__facts { left: var(--margin); top: calc(95.8svh - var(--pf-captop)); display: flex; align-items: baseline; gap: 24px; white-space: nowrap; font-size: var(--fs-fact-num); }
+.fact { display: flex; align-items: baseline; }
+.fact__divider { width: 1px; height: 14px; background: var(--rule-gold); align-self: center; transform-origin: top center; }
+
+/* cover tones → image tones (the lift re-tones over 1.2 s) */
+html:is([data-state="lift"], [data-state="ready"]) .hero__eyebrow { color: var(--cream); }
+html:is([data-state="lift"], [data-state="ready"]) .hero__rule { background: var(--rule-on-image); }
+.hero__eyebrow, .hero__rule { transition: color 1.2s var(--ease-out), background-color 1.2s var(--ease-out); }
+
+/* ---------- pins ---------- */
+.hero__pins { position: absolute; inset: 0; pointer-events: none; }
+.pin { position: absolute; left: var(--px); top: var(--py); translate: -50% -50%; opacity: 0; visibility: hidden; pointer-events: auto; }
+.pin__btn { position: relative; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: rgb(var(--night-rgb) / 0.55); box-shadow: inset 0 0 0 1px var(--cream); color: var(--cream); font: 400 13px/1 var(--font-display);  transition: background-color var(--dur-m) var(--ease-out), color var(--dur-m) var(--ease-out); }
+.pin__btn::before { content: ""; position: absolute; inset: -8px; }
+.pin__btn:hover, .pin__btn:focus-visible { background: var(--cream); color: var(--ink); }
+.pin__ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--cream); pointer-events: none; }
+.pin__num { position: relative; }
+
+.tipcard { position: fixed; z-index: 30; width: 264px; padding: 20px; background: var(--cream-2); color: var(--ink); border: 1px solid var(--border-gold); pointer-events: none; opacity: 0; }
+.tipcard__label { font: 400 var(--fs-micro) / 1 var(--font-sans); letter-spacing: 0.32em; text-transform: uppercase; color: rgb(var(--ink-rgb) / 0.5); margin-bottom: 12px; }
+.tipcard__text { font: 400 13px / 1.6 var(--font-sans); }
+
+/* ---------- ring CTA ---------- */
+.cta { position: absolute; left: 50%; top: 89.6svh; translate: -50% -50%; z-index: 6; width: clamp(132px, 9.2vw, 160px); aspect-ratio: 1; display: grid; place-items: center; color: var(--cream); }
+.cta__svg { width: 100%; height: 100%; overflow: visible; }
+.cta__disc { fill: var(--cta-disc); }
+.cta__ring { fill: none; stroke: rgb(var(--cream-rgb) / 0.4); stroke-width: 1; }
+.cta__arc { fill: none; stroke: var(--gold); stroke-width: 1; stroke-dasharray: 17.2 411.5; }
+.cta__text text { font: 400 8px / 1 var(--font-sans); letter-spacing: 0.32em; text-transform: uppercase; fill: currentColor; }
+.cta__arrow { font: 400 14px / 1 var(--font-sans); fill: currentColor; }
+.cta__label { display: none; }
+
+/* ---------- phone layout ---------- */
+@media (max-width: 991px), (orientation: portrait) {
+  .hero__img img { object-position: 50% 50%; }
+  @media (min-width: 600px) { .hero__img img { object-position: 50% 42%; } }
+  .hero__grain { display: none; }
+  .hero__eyebrow { top: calc(52svh - var(--jo-captop)); font-size: var(--fs-label-sm); }
+  .hero__short { top: 56svh; width: 40px; }
+  .hero__title-a { top: calc(66svh - var(--pf-baseline)); }
+  .hero__title-b { top: calc(71.7svh - var(--pf-baseline)); }
+  .hero__counter { left: auto; right: var(--margin); top: calc(74.9svh - var(--pf-baseline)); flex-direction: row-reverse; }
+  .hero__rule { width: 90vw; top: 75.8svh; }
+  .hero__address { top: calc(78.7svh - var(--jo-captop)); font-size: 12px; }
+  .hero__tagline { right: auto; left: var(--margin); top: calc(10svh - var(--pf-captop)); text-align: left; line-height: 1.2; white-space: normal; max-width: 70vw; }
+  .hero__facts { top: calc(84.4svh - var(--pf-baseline)); flex-wrap: wrap; row-gap: 14px; column-gap: 16px; max-width: 90vw; }
+  .fact__divider { height: 12px; }
+  .fact:nth-child(5) { flex-basis: 100%; }
+  .fact__divider:nth-child(4) { display: none; }
+  .pin { left: var(--mx); top: var(--my); }
+  .cta { top: 92.7svh; width: auto; aspect-ratio: auto; }
+  .cta__svg { display: none; }
+  .cta__label { display: inline-flex; align-items: center; gap: 10px; color: var(--cream); white-space: nowrap; }
+  .cta__label-arrow { font-size: 14px; }
+}

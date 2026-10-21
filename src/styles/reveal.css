@@ -1,0 +1,8 @@
+/* Split-text pieces */
+html[data-state="loading"] [data-reveal] { visibility: hidden; }
+.w, .c, .l { display: inline-block; will-change: transform; }
+.c { backface-visibility: hidden; }
+/* line masks must be block boxes: overflow never clips an inline span */
+.l-mask { display: block; overflow: clip; }
+/* masked lines: give the ascenders and descenders room inside the clip box */
+.l { padding: 0.12em 0.2em 0.14em 0.08em; margin: -0.12em -0.2em -0.14em -0.08em; }

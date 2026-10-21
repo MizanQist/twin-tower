@@ -1,0 +1,44 @@
+/* section 13 — the footer: the dark page the closing spread shrinks into; the sales desk set huge, the address, the small print */
+.footer { position: relative; z-index: 2; margin-top: -14svh; background: var(--night-deep); color: var(--cream); overflow: clip; }
+.footer__inner { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: space-between; padding: 12svh var(--margin) 6svh; will-change: transform, opacity; transform-origin: center center; }
+.footer__top { position: absolute; left: var(--margin); top: 9svh; display: inline-flex; align-items: center; gap: 14px; color: rgb(var(--cream-rgb) / 0.6); text-decoration: none; }
+.footer__top:hover, .footer__top:focus-visible { color: var(--cream); }
+.footer__top i { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgb(var(--cream-rgb) / 0.3); transition: border-color var(--dur-s) var(--ease-out), background-color var(--dur-s) var(--ease-out); }
+.footer__top svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.2; }
+.footer__top:hover i, .footer__top:focus-visible i { border-color: var(--cream); background: rgb(var(--cream-rgb) / 0.08); }
+.footer__head { display: grid; justify-items: center; text-align: center; margin: 10svh 0 0; }
+.footer__mark { width: min(44vw, 190px); height: auto; color: var(--cream); fill: currentColor; }
+.footer__big { display: block; margin: 5svh 0 0; font: 400 clamp(2.6rem, 7.4vw, 7.6rem) / 1 var(--font-display); letter-spacing: -0.025em; color: var(--cream); text-decoration: none; }
+.footer__big:hover .c, .footer__big:focus-visible .c { color: var(--cream); }
+.footer__contact { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.2em 3.2em; margin: 4svh 0 0; color: rgb(var(--cream-rgb) / 0.55); }
+.footer__contact a { color: var(--cream); text-decoration: none; border-bottom: 1px solid rgb(var(--cream-rgb) / 0.35); padding-bottom: 3px; transition: border-color var(--dur-s) var(--ease-out); }
+.footer__contact a:hover, .footer__contact a:focus-visible { border-color: var(--cream); }
+.footer__contact span { white-space: nowrap; }
+.footer__addr { display: grid; grid-template-columns: repeat(2, minmax(0, 300px)); justify-content: center; gap: 4vw; margin: 8svh 0 0; text-align: center; }
+.footer__addr h3 { margin: 0 0 1.2em; color: rgb(var(--cream-rgb) / 0.5); }
+.footer__addr p, .footer__addr a { margin: 0; font: 400 clamp(0.9375rem, 1.05vw, 1.0625rem) / 1.6 var(--font-sans); color: rgb(var(--cream-rgb) / 0.85); text-decoration: none; }
+.footer__addr a { border-bottom: 1px solid rgb(var(--cream-rgb) / 0.3); padding-bottom: 2px; transition: border-color var(--dur-s) var(--ease-out); }
+.footer__addr a:hover, .footer__addr a:focus-visible { border-color: var(--cream); }
+.footer__foot { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 4vw; padding-top: 4svh; border-top: 1px solid rgb(var(--cream-rgb) / 0.14); margin-top: 10svh; }
+.footer__info { margin: 0; color: rgb(var(--cream-rgb) / 0.55); display: flex; flex-wrap: wrap; gap: 0.6em 2em; }
+.footer__info b { font-weight: 400; color: var(--cream); }
+.footer__note { margin: 1.2em 0 0; font: 400 12px / 1.7 var(--font-sans); color: rgb(var(--cream-rgb) / 0.4); max-width: 44em; }
+.footer__credit { margin: 0; text-align: right; color: rgb(var(--cream-rgb) / 0.4); white-space: nowrap; }
+.footer__credit a { color: rgb(var(--cream-rgb) / 0.75); text-decoration: none; border-bottom: 1px solid rgb(var(--cream-rgb) / 0.25); padding-bottom: 2px; transition: color var(--dur-s) var(--ease-out), border-color var(--dur-s) var(--ease-out); }
+.footer__credit a:hover, .footer__credit a:focus-visible { color: var(--cream); border-color: var(--cream); }
+
+/* the fixed chrome steps aside for the footer */
+.chrome { transition: opacity var(--dur-m) var(--ease-out); }
+html.is-footer .chrome { opacity: 0; }
+
+@media (max-width: 991px), (orientation: portrait) {
+  .footer { margin-top: -10svh; }
+  .footer__inner { padding: 10svh var(--margin) 5svh; }
+  .footer__top { position: static; margin-bottom: 6svh; }
+  .footer__head { margin-top: 0; }
+  .footer__big { font-size: clamp(2.4rem, 11vw, 3.6rem); }
+  .footer__contact { flex-direction: column; align-items: center; gap: 1em; }
+  .footer__addr { grid-template-columns: 1fr; gap: 5svh; margin-top: 7svh; }
+  .footer__foot { grid-template-columns: 1fr; gap: 4svh; margin-top: 8svh; }
+  .footer__credit { text-align: left; white-space: normal; }
+}

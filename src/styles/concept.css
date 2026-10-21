@@ -1,0 +1,51 @@
+/* section 4 — the concept: a pinned stage whose track slides sideways as the page scrolls (ERA's horizontal area) */
+.concept { position: relative; background: var(--cream); color: var(--ink); }
+.concept__area { position: relative; }
+.concept__sticky { position: sticky; top: 0; height: 100svh; overflow: clip; }
+.concept__initial { position: absolute; right: -10vw; top: -6svh; font: 400 var(--fs-watermark) / 1 var(--font-display); color: var(--watermark); user-select: none; pointer-events: none; }
+.concept__track { position: absolute; left: 0; top: 0; height: 100svh; display: flex; align-items: stretch; will-change: transform; }
+.concept__panel { flex: none; height: 100svh; box-sizing: border-box; }
+.concept__panel--text { width: 100vw; display: grid; grid-template-columns: 31vw 1px 1fr; column-gap: 4vw; padding: 14svh var(--margin) 0; align-content: start; }
+.concept__eyebrow { color: rgb(var(--ink-rgb) / 0.5); margin-bottom: 3.2svh; }
+.concept__title { font: 400 clamp(2.4rem, 4.85vw, 5.2rem) / 1.04 var(--font-display); letter-spacing: -0.02em; margin: 0 0 7svh; }
+.concept__line { display: block; }
+.concept__rule { display: block; width: 1px; background: var(--hairline); align-self: stretch; }
+.concept__wide { padding-top: 0.6em; }
+.concept__body { font: 400 clamp(0.9375rem, 0.85rem + 0.3vw, 1.125rem) / 1.75 var(--font-sans); color: rgb(var(--ink-rgb) / 0.72); max-width: 34em; margin: 0 0 1.4em; }
+.concept__hint { display: flex; align-items: center; gap: 16px; margin-top: 4svh; color: rgb(var(--ink-rgb) / 0.5); white-space: nowrap; }
+.concept__hint-line { display: block; width: 64px; height: 1px; background: var(--ink); opacity: 0.5; }
+
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); border-block: 1px solid var(--rule-gold); margin-top: 4svh; }
+.stat { padding: 2vw 1.6vw 1.8vw 0; display: flex; flex-direction: column; gap: 0.8em; }
+.stat:nth-child(even) { padding-left: 1.6vw; border-left: 1px solid var(--hairline); }
+.stat:nth-child(n + 3) { border-top: 1px solid var(--hairline); }
+.stat__num { font: 400 clamp(1.75rem, 2.4vw, 2.5rem) / 1 var(--font-display); font-variant-numeric: tabular-nums; }
+.stat__num small { font-size: 0.6em; margin-left: 0.15em; }
+.stat__label { font-size: var(--fs-label-sm); color: rgb(var(--ink-rgb) / 0.5); }
+
+/* the five principle cards, side by side */
+.principles { display: flex; gap: 3vw; padding: 14svh 10vw 0 6vw; align-items: flex-start; }
+.principle { position: relative; width: 22vw; flex: none; display: flex; flex-direction: column; }
+.principle__media { width: 100%; aspect-ratio: 3 / 4; overflow: clip; border: 1px solid var(--hairline); background: var(--cream-2); margin-bottom: 1.4em; }
+.principle__media img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.06); transition: transform 1.2s var(--ease-out); }
+.principle:hover .principle__media img { transform: scale(1); }
+.principle__media--plan img { object-fit: cover; }
+.principle__num { font: 400 0.9375rem / 1 var(--font-display); color: rgb(var(--ink-rgb) / 0.45); margin-bottom: 0.9em; }
+.principle__name { margin: 0 0 0.5em; font: 400 clamp(1.4rem, 1.8vw, 1.9rem) / 1.1 var(--font-display); letter-spacing: -0.01em; }
+.principle__desc { margin: 0; font: 400 clamp(0.875rem, 0.8rem + 0.25vw, 1rem) / 1.6 var(--font-sans); color: rgb(var(--ink-rgb) / 0.62); }
+.concept__meta { position: absolute; left: var(--margin); bottom: 4.2svh; margin: 0; color: rgb(var(--ink-rgb) / 0.5); }
+
+@media (max-width: 991px), (orientation: portrait) {
+  .concept__sticky { position: static; height: auto; overflow: visible; padding-bottom: 12svh; }
+  .concept__track { position: static; height: auto; display: block; transform: none !important; }
+  .concept__panel { height: auto; width: auto; }
+  .concept__panel--text { grid-template-columns: 1fr; padding: 12svh var(--margin) 0; }
+  .concept__rule { display: none; }
+  .concept__title { font-size: clamp(2.2rem, 9.2vw, 3rem); margin-bottom: 5svh; }
+  .concept__hint { display: none; }
+  .principles { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 4vw; padding: 8svh var(--margin) 2svh; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .principles::-webkit-scrollbar { display: none; }
+  .principle { width: 74vw; scroll-snap-align: start; }
+  .concept__meta { position: static; margin: 6svh var(--margin) 0; }
+  .concept__initial { right: -24vw; top: 4svh; font-size: 90vw; }
+}

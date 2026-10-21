@@ -1,0 +1,8 @@
+/* Wrace wordmark as type (no SVG mark supplied), the phone menu close button, and the floor slide's level line */
+.wordmark-text { font: 400 1.6rem / 1 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; margin: 0; }
+.chrome .wordmark { width: auto; height: auto; color: var(--fg); }
+.footer__mark.wordmark-text { font-size: clamp(2rem, 4vw, 3rem); color: var(--cream); }
+.menu__mark.wordmark-text { font-size: 1.4rem; color: var(--cream); }
+.menu__close { position: absolute; top: 1.4rem; right: var(--margin); z-index: 2; background: none; border: 0; color: var(--cream); padding: 0.6rem 0; cursor: pointer; letter-spacing: 0.32em; text-transform: uppercase; }
+.villa__level { margin: 0 0 0.8rem; color: var(--fg-muted); }
+.tipcard.is-sheet { left: 16px; right: 16px; bottom: 16px; top: auto; width: auto; transform: none; }

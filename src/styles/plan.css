@@ -1,0 +1,88 @@
+/* section 6 — the master plan: the architect's sheet on the page; the road draws itself under scroll and each plot is stamped as the pen reaches it */
+.plan { position: relative; background: var(--cream); color: var(--ink); padding: 14svh 0 12svh; overflow: clip; }
+.plan__head { display: grid; grid-template-columns: 36vw 1px 1fr; column-gap: 4vw; padding: 0 var(--margin); align-items: start; }
+.plan__eyebrow { color: rgb(var(--ink-rgb) / 0.5); margin-bottom: 3.2svh; }
+.plan__title { font: 400 clamp(2.4rem, 4.85vw, 5.2rem) / 1.04 var(--font-display); letter-spacing: -0.02em; margin: 0; }
+.plan__line { display: block; }
+.plan__rule { display: block; width: 1px; background: var(--hairline); align-self: stretch; }
+.plan__wide { padding-top: 0.6em; }
+.plan__body { font: 400 clamp(0.9375rem, 0.85rem + 0.3vw, 1.125rem) / 1.75 var(--font-sans); color: rgb(var(--ink-rgb) / 0.72); max-width: 34em; margin: 0 0 1.4em; }
+.plan__stats { max-width: 36em; }
+
+/* the model */
+.plan__ctl { display: flex; justify-content: flex-end; gap: 10px; margin: 6svh var(--margin) 0; }
+.plan__seg { display: inline-flex; border: 1px solid var(--hairline); }
+.plan__seg button { font: 400 var(--fs-label-sm) / 1 var(--font-sans); letter-spacing: 0.25em; text-transform: uppercase; padding: 12px 16px; background: none; border: 0; color: rgb(var(--ink-rgb) / 0.55); cursor: pointer; transition: background-color var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out); }
+.plan__seg button + button { border-left: 1px solid var(--hairline); }
+.plan__seg button[aria-pressed="true"] { background: var(--ink); color: var(--cream); }
+.plan__seg button:hover:not([aria-pressed="true"]), .plan__seg button:focus-visible { color: var(--ink); }
+.plan__hint { display: flex; align-items: center; gap: 16px; margin: 2.4svh var(--margin) 0; color: rgb(var(--ink-rgb) / 0.5); white-space: nowrap; }
+.plan__hint i { display: block; width: 48px; height: 1px; background: var(--ink); opacity: 0.5; }
+.plan__hint[hidden] { display: none; }
+.plan__canvas { position: absolute; inset: 0; }
+.plan__canvas canvas { display: block; width: 100% !important; height: 100% !important; touch-action: pan-y; }
+.plan__stage.is-3d .plan__sheet { visibility: hidden; }
+.plan__lock { display: none; }
+.plan__scroller { margin-top: 3svh; }
+.plan__stage { position: relative; width: min(90vw, 136svh); aspect-ratio: 1.7; margin: 0 auto; }
+.plan__sheet, .plan__sheet img { display: block; width: 100%; height: auto; }
+
+/* the plots: numbered pins on the houses (the hero's pin recipe, on cream) */
+.plan__pins { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; pointer-events: none; }
+.plot { pointer-events: auto; }
+.plot { position: absolute; left: var(--px); top: var(--py); translate: -50% -50%; opacity: 0; }
+.plot.is-hover .plot__btn { background: var(--ink); color: var(--cream); transform: scale(1.15); }
+.plot__btn { position: relative; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--cream); box-shadow: inset 0 0 0 1px var(--ink); color: var(--ink); font: 400 12px / 1 var(--font-display); cursor: pointer; transition: background-color var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out), transform var(--dur-s) var(--ease-out); }
+.plot__btn::before { content: ""; position: absolute; inset: -10px; border-radius: 50%; }
+.plot__btn:hover, .plot__btn:focus-visible, .plot__btn[aria-expanded="true"] { background: var(--ink); color: var(--cream); transform: scale(1.15); }
+.plot__btn:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+.plot--hollow .plot__btn { background: transparent; box-shadow: none; border: 1px dashed rgb(var(--ink-rgb) / 0.55); color: rgb(var(--ink-rgb) / 0.7); }
+.plot--hollow .plot__btn:hover, .plot--hollow .plot__btn:focus-visible, .plot--hollow .plot__btn[aria-expanded="true"] { background: var(--cream-2); color: var(--ink); border-style: solid; }
+
+/* the plot card (the enquiry tip's look) */
+.plan__card { position: absolute; z-index: 5; width: 264px; padding: 20px; background: var(--cream-2); color: var(--ink); border: 1px solid var(--border-gold); }
+.plan__card[hidden] { display: none; }
+.plan__card-close { position: absolute; top: 16px; right: 16px; background: none; border: 0; padding: 4px; color: rgb(var(--ink-rgb) / 0.5); cursor: pointer; }
+.plan__card-close:hover, .plan__card-close:focus-visible { color: var(--ink); }
+.plan__card-label { color: rgb(var(--ink-rgb) / 0.5); margin: 0 0 14px; }
+.plan__card-area { font: 400 28px / 1 var(--font-display); margin: 0 0 12px; }
+.plan__card-area small { font-size: 0.6em; margin-left: 0.15em; }
+.plan__card-where { font: 400 13px / 1.6 var(--font-sans); color: rgb(var(--ink-rgb) / 0.75); margin: 0 0 14px; }
+.plan__card-status { color: rgb(var(--ink-rgb) / 0.5); margin: 0 0 12px; }
+.plan__card-link { display: inline-block; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 4px; }
+.plan__card-link[hidden] { display: none; }
+
+/* the key and the note */
+.plan__foot { display: flex; flex-direction: column; align-items: flex-start; gap: 2.4svh; margin: 5svh var(--margin) 0; padding-top: 2.4svh; border-top: 1px solid var(--hairline); }
+.plan__legend { display: flex; flex-wrap: wrap; gap: 1.2em 2.2em; list-style: none; margin: 0; padding: 0; color: rgb(var(--ink-rgb) / 0.6); max-width: 44vw; }
+.plan__legend li { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.plan__swatch { display: block; width: 10px; height: 10px; background: var(--c); box-shadow: inset 0 0 0 1px rgb(var(--ink-rgb) / 0.12); }
+.plan__note { font: 400 12px / 1.7 var(--font-sans); color: var(--fg-muted); max-width: 44em; margin: 0; }
+
+/* the hand-off: a gold circle around a typical plot and a leader that runs off the page into the floor plans */
+.plan__leader { position: absolute; left: var(--lx); top: var(--ly); width: 1px; height: var(--lh, 0px); background: var(--rule-gold); pointer-events: none; }
+.plan__callout-label { position: absolute; left: 16px; bottom: 0; margin: 0; white-space: nowrap; color: rgb(var(--ink-rgb) / 0.6); }
+.plan__meta { position: absolute; left: var(--margin); bottom: 4.2svh; margin: 0; color: rgb(var(--ink-rgb) / 0.5); }
+
+@media (max-width: 991px), (orientation: portrait) {
+  .plan { padding: 12svh 0 10svh; }
+  .plan__head { grid-template-columns: 1fr; column-gap: 0; }
+  .plan__rule { display: none; }
+  .plan__title { font-size: clamp(2.2rem, 9.2vw, 3rem); margin-bottom: 4svh; }
+  .plan__wide { padding-top: 0; }
+  .plan__ctl { justify-content: flex-start; flex-wrap: wrap; margin-top: 5svh; }
+  .plan__seg button { padding: 12px 12px; letter-spacing: 0.2em; }
+  .plan__hint { white-space: normal; margin-top: 2svh; }
+  .plan__scroller { margin-top: 2svh; }
+  .plan__stage { width: 100vw; aspect-ratio: 1 / 0.92; margin: 0; }
+  .plan__stage.is-3d .plot { display: none; }
+  .plan__stage.is-3d .plot:has(.plot__btn[aria-expanded="true"]), .plan__stage.is-3d .plot:has(.plot__btn:focus-visible) { display: block; }
+  .plan__lock { display: block; position: absolute; left: 50%; bottom: 16px; translate: -50% 0; padding: 14px 18px; background: var(--cream); color: var(--ink); border: 1px solid var(--hairline); z-index: 6; }
+  .plan__lock[aria-pressed="true"] { background: var(--ink); color: var(--cream); }
+  .plan__card { position: fixed; inset: auto 16px 16px; width: auto; z-index: 40; }
+  .plan__foot { margin-top: 4svh; }
+  .plan__legend { max-width: none; gap: 1em 1.8em; }
+  .plan__leader { display: none; }
+  .plan__callout-label { position: static; display: block; margin: 5svh var(--margin) 0; white-space: normal; }
+  .plan__meta { position: static; margin: 6svh var(--margin) 0; }
+}

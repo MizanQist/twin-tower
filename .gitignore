@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.qa/
+.impeccable/
+.dev.log
+.DS_Store

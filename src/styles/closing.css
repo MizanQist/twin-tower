@@ -1,0 +1,27 @@
+/* section 12 — the closing statement: the brochure's last line over the golden-hour street, with the ring that books a viewing */
+.closing { position: relative; background: var(--night-deep); color: var(--cream); overflow: clip; }
+.closing__clip { position: relative; }
+.closing__stage { position: relative; min-height: 100svh; aspect-ratio: 144 / 150; display: grid; grid-template-rows: auto 1fr auto; align-items: center; justify-items: center; padding: 16svh var(--margin) 14svh; text-align: center; }
+.closing__media { position: absolute; inset: -12% 0; z-index: 0; will-change: transform; }
+.closing__media picture, .closing__media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; }
+.closing__scrim { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(180deg, rgb(var(--night-rgb) / 0.78) 0, rgb(var(--night-rgb) / 0.2) 32%, rgb(var(--night-rgb) / 0.18) 60%, rgb(var(--night-rgb) / 0.72) 100%); }
+.closing__desc { position: relative; z-index: 1; margin: 0; max-width: 34em; font: 400 clamp(0.9375rem, 0.85rem + 0.3vw, 1.0625rem) / 1.75 var(--font-sans); color: rgb(var(--cream-rgb) / 0.82); }
+.closing__centre { position: relative; z-index: 1; display: grid; justify-items: center; }
+.closing__title { font: 400 clamp(3.2rem, 9.6vw, 10rem) / 0.96 var(--font-display); letter-spacing: -0.025em; margin: 0; }
+.closing__line { display: block; }
+.closing__sub { margin: 4svh 0 0; color: rgb(var(--cream-rgb) / 0.7); }
+.closing__cta { position: relative; z-index: 1; display: grid; place-items: center; width: 160px; height: 160px; border-radius: 50%; color: var(--cream); text-decoration: none; text-align: center; margin-top: 8svh; }
+.closing__cta-ring { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: rgb(var(--cream-rgb) / 0.4); stroke-width: 1; transform: rotate(-90deg); }
+.closing__cta-arc { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--cream); stroke-width: 1; transform: rotate(-90deg); stroke-dasharray: 1 1000; transition: stroke-dasharray var(--dur-l) var(--ease-in-out); }
+.closing__cta:hover .closing__cta-arc, .closing__cta:focus-visible .closing__cta-arc { stroke-dasharray: 250 1000; }
+.closing__cta span { position: relative; font: 400 var(--fs-label) / 1.7 var(--font-sans); text-transform: uppercase; letter-spacing: 0.25em; width: 7.5em; }
+.closing__cta:focus-visible { outline: none; }
+.closing__meta { position: relative; z-index: 1; margin: 0; color: rgb(var(--cream-rgb) / 0.45); display: flex; gap: 2.4em; flex-wrap: wrap; justify-content: center; }
+
+@media (max-width: 991px), (orientation: portrait) {
+  .closing__stage { aspect-ratio: auto; min-height: 100svh; padding: 16svh var(--margin) 12svh; grid-template-rows: auto 1fr auto; row-gap: 6svh; }
+  .closing__media picture, .closing__media img { object-position: 50% 50%; }
+  .closing__title { font-size: clamp(2.8rem, 13.5vw, 4.6rem); }
+  .closing__cta { width: 136px; height: 136px; margin-top: 6svh; }
+  .closing__meta { gap: 1.2em; }
+}
